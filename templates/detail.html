@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ curr_article.title }}</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <ul class="nav nav-tabs">
+    <li role="presentation"><a href="{% url 'demo:demo_home' %}">首页</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_login' %}">登录</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_register' %}">注册</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_correction' %}">找回密码</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_index' %}">个人中心</a></li>
+    </ul>
+</head>
+<body>
+<div class="container page-header">
+    <h1>{{ curr_article.title }}</h1>
+</div>
+<div class="container body-main">
+    <div>
+         {% for section in section_list %}
+         <p>{{ section }}</p>
+         {% endfor %}
+    </div>
+</div>
+<div>
+    <nav aria-label="...">
+  <ul class="pager">
+      {% if curr_article.user.id == request.user.id %}
+              <form action="{% url "demo:demo_article_delete" %}" method="post">
+                      {% csrf_token %}
+                          <input type="text" value="{{ curr_article.title }}" name="article_title" style="display: none">
+                          <button type="submit">删除</button>
+              </form>
+      {% endif %}
+      <li><a href="/demo/detail/{{ previous_article.article_id }}">上一篇：{{ previous_article.title }}</a></li>
+      <li><a style="color: blue" href="{% url 'demo:demo_home' %}">我的博客首页</a></li>
+      <li><a href="/demo/detail/{{ next_article.article_id }}">下一篇：{{ next_article.title }}</a></li>
+  </ul>
+</nav>
+
+</div>
+<div class="container body-main">
+    <div class="col-md-8">
+        <form action="{% url 'demo:demo_comment_add' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+           <div class="forms">
+               <h3 style="color: forestgreen">发表评论:</h3><input placeholder="发个评论说点什么吧..." type="text" id="input_comment" name="comment"><br>
+               <input type="text" value="{{ curr_article.article_id }}" name="article_id" style="display: none"><br>
+               <div class="btn">
+                <div>
+                    <button style="color: forestgreen" type ='submit'>提交</button>
+                </div>
+               </div>
+           </div>
+        </form>
+    </div>
+</div>
+<div class="container body-main">
+    <div class="col-md-8">
+         {% for comment in thing_comment %}
+         <div class="panel panel-info">
+           <div class="panel-body" >
+              {{ comment }}
+              {% if curr_article.user.username == request.user.username %}
+              <form action="{% url "demo:demo_comment_delete" %}" method="post">
+                      {% csrf_token %}
+                          <input type="text" value="{{ comment.comment }}" name="comment" style="display: none">
+                          <input type="text" value="{{ curr_article.article_id }}" name="article_id" style="display: none">
+                          <button type="submit">删除</button>
+              </form>
+              {% endif %}
+           </div>
+         </div>
+         {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

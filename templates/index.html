@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="{% url 'demo:demo_home' %}">首页</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_login' %}">登录</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_register' %}">注册</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_correction3' %}">修改密码</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_logout' %}">退出登录</a></li>
+        <li role="presentation" class="active"><a href="{% url 'demo:demo_index' %}">个人中心</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_article_add' %}">添加文章</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_article_correct2' %}">修改文章</a></li>
+        <li role="presentation"><a href="{% url 'demo:demo_article_delete' %}">删除文章</a></li>
+    </ul>
+</head>
+<body>
+<div class = "container page_header">
+     <h1>
+         <button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{ username }}的个人中心
+         </button>
+     </h1>
+
+</div>
+<div class = "container page_body">
+    <div class="col-md-9" role = "main">
+        <div class="body-main">
+            <div>
+                <h3 style="color: forestgreen">个人信息：</h3>
+                <p> </p>
+            </div>
+            <div>
+                <h3><li>用户名:{{ username }}</li></h3>
+                <h3><li>邮箱:{{ email }}</li></h3>
+                <h3><li>性别：{{ dendle }}</li></h3>
+                <h3><li>籍贯：{{ birth_place }}</li></h3>
+                <h3><li>大学：{{ university }}</li></h3>
+                <h3><li>年龄：{{ age }}</li></h3>
+                <h3><li>身高：{{ heigth }}</li></h3>
+                <h3><li>体重：{{ weigth }}</li></h3>
+                <h3><li>语言：{{ language }}</li></h3>
+                <h3><li>出生日期：{{ birthday }}</li></h3>
+                <h3><li>申请时间：{{ createdate }}</li></h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" role = "complementary">
+        <div>
+            <h2>我的文章</h2>
+            {% for article in my_article %}
+                <h4><a href="/demo/detail/{{article.article_id}}">{{ article.title }}</a></h4>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

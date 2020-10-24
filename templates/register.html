@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <ul class="nav nav-tabs">
+    <li role="presentation"><a href="{% url 'demo:demo_home' %}">首页</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_login' %}">登录</a></li>
+    <li role="presentation" class="active"><a href="{% url 'demo:demo_register' %}">注册</a></li>
+    <li role="presentation"><a href="{% url 'demo:demo_correction' %}">忘记密码</a></li>
+    </ul>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册页面</title>
+    <style>
+        body{
+            background-color: rgb(235, 239, 242);
+            font-size: 16px;
+        }
+        .login{
+            width: 600px;
+            height: 390px;
+            margin: 5px auto;
+            border:1px solid rgb(203, 219,218);
+        }
+        .login form{
+            width: 600px;
+            background-color: rgb(254,254,254);
+        }
+        .login .forms{
+            width: 500px;
+            margin: 0 auto;
+            padding:10px 0 20px 0;
+        }
+        .login label{
+            display: inline-block;
+            width: 0px;
+            padding-bottom: 8px;
+        }
+        .login input{
+            width: 500px;
+            height: 35px;
+            border:none;
+            outline: none;
+            border:1px solid rgb(180, 143, 219);
+            background-color: #f2faff;
+            font-size: 18px;
+            text-indent: 6px;
+            border-radius: 5px;
+        }
+        .btn{
+            width: 600px;
+            padding: 18px 0;
+            border-top: 1px solid #93ff7c;
+            background-color: rgb(242, 250, 255);
+        }
+        .btn div{
+            overflow: hidden;
+            width: 450px;
+            margin: 0 auto;
+        }
+        .btn button{
+            float:right;
+            padding:8px 16px;
+            background: rgb(21, 239, 40);
+            border:1px solid #ccc;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .btn a{
+            float:left;
+            padding: 5px 0;
+            text-decoration: none;
+            color:#ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <form action="{% url 'demo:demo_register' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="forms">
+               <h3 style="color: forestgreen">用户名:</h3><label for="input_register_name"></label><input placeholder="Username" type="text" id="input_register_name" name="register_username"><br>
+               <h3 style="color: forestgreen">密码:</h3><input placeholder="Password" type="password" id="input_register_password" name="register_password"><br>
+               <h3 style="color: forestgreen">邮箱:</h3><input placeholder="Email" type="email" id="input_register_email" name="register_email"><br>
+               <h3 style="color: forestgreen">性别:</h3><input placeholder="Gendle" type="text" id="input_gendle" name="gendle"><br>
+               <h3 style="color: forestgreen">籍贯:</h3><input placeholder="Birth Place" type="text" id="input_birth_place" name="birth_place"><br>
+               <h3 style="color: forestgreen">大学:</h3><input placeholder="University" type="text" id="input_university" name="university"><br>
+               <h3 style="color: forestgreen">年龄:</h3><input placeholder="Age" type="text" id="input_age" name="age"><br>
+               <h3 style="color: forestgreen">体重:</h3><input placeholder="Weigth" type="text" id="input_weigth" name="weigth"><br>
+               <h3 style="color: forestgreen">身高:</h3><input placeholder="Heigth" type="text" id="input_heigth" name="heigth"><br>
+               <h3 style="color: forestgreen">语言:</h3><input placeholder="Language" type="text" id="input_language" name="language"><br>
+               <h3 style="color: forestgreen">生日:</h3><input placeholder="Birthday" type="text" id="input_birthday" name="birthday"><br>
+               <h3 style="color: forestgreen">密保问题一:</h3><input placeholder="question" type="text" id="input_question1" name="question1"><br>
+               <h3 style="color: forestgreen">密保问题一答案:</h3><input placeholder="answer" type="text" id="input_answer1" name="answer1"><br>
+               <h3 style="color: forestgreen">密保问题二:</h3><input placeholder="question" type="text" id="input_question2" name="question2"><br>
+               <h3 style="color: forestgreen">密保问题二答案:</h3><input placeholder="answer" type="text" id="input_answer2" name="answer2"><br>
+               <h3 style="color: forestgreen">密保问题三:</h3><input placeholder="question" type="text" id="input_question3" name="question3"><br>
+               <h3 style="color: forestgreen">密保问题三答案:</h3><input placeholder="answer" type="text" id="input_answer3" name="answer3"><br>
+            </div>
+            <div class="btn">
+                <div>
+                    <a style="color: red">{{ result }}</a>
+                    <button style="color: forestgreen" type ='submit'>提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
